@@ -2,3 +2,4 @@ theme: minima
 title: Ricahrd's Technical Paraphernalia 
 author: Richard Davies
 description: Sometimes I will just forget if I don't write it down..
+layout: default

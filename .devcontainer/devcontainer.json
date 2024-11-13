@@ -1,0 +1,12 @@
+ {
+     "name": "Jekyll",
+     "image": "mcr.microsoft.com/devcontainers/jekyll:2-bookworm",
+     "runArgs": [
+             "--security-opt", "label=disable",
+             "--userns=host",
+             "--hostname=jekyll-dev-container"
+       ],
+     "remoteUser": "root"
+     // "onCreateCommand": ".devcontainer/bin/onCreateCommand.sh",
+     // "updateContentCommand": ".devcontainer/bin/updateContentCommand.sh",
+ }
