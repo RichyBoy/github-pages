@@ -1,6 +1,6 @@
 ---
 title: Index of scribblings
-layout: default
+layout: home
 ---
 
 ### What's this blog all about ?
