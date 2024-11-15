@@ -3,4 +3,6 @@ Any experienced developer will know there are times where there isn't anything t
 
 Anyway, some pages of interest below.
 
+layout: home
+
 ---
