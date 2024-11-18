@@ -1,7 +1,7 @@
 ---
 title: "How to setup a blog like this one.."
 date: 2024-11-15
-layout: default
+layout: post
 tags: jekyll blog github vscode
 ---
 
