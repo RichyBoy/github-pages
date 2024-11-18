@@ -19,8 +19,13 @@ layout: default
     {{ content }}
   </div>
   
-  shortname: fake_disqus_utterances
-    {% include comments.html %}
+<script src="https://utteranc.es/client.js" 
+        repo="RichyBoy/github-pages" 
+        issue-term="pathname" 
+        label="scribblings"
+        theme="github-light" 
+        crossorigin="anonymous" async>
+</script>
     
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
