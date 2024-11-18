@@ -5,4 +5,3 @@ layout: home
 
 Anyway, some pages of interest below.
 </p>
-<h3>ARse</h3>
