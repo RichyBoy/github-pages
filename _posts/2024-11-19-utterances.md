@@ -62,7 +62,6 @@ layout: default
     {{ content }}
 </div>
 
-shortname: fake_disqus_utterances
     {% include comments.html %}
     
 <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
@@ -71,7 +70,6 @@ shortname: fake_disqus_utterances
 
 The actual change is right at the bottom:
 ```{% raw %}
-shortname: fake_disqus_utterances
   {% include comments.html %}{% endraw %}
 ```
         
@@ -83,7 +81,9 @@ from
 {%- endif -%}{% endraw %}
 ```
 
-Probably don't need the shortname, and probably could place the script code in directly, I also notice the git repository has 'base' in the frontmatter yet I have default.. maybe I grabbed an older version, any, all I know is that it works!
+I have to report that I've also just used the script code directly, negating the need for the include, but I'm likely to become more expansive with Jekyll so may as well do things "properly".
+
+I also notice the git repository has 'base' in the frontmatter layout yet I have 'default'.. maybe I grabbed an older version, all I know is that it works!
 
 The only other change is to make sure your frontmatter is picking up the default override, for example on this very page:
 ```{% raw %}
