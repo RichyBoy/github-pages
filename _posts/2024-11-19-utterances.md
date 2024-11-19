@@ -1,7 +1,7 @@
 ---
 title: "Comments section on github pages with Utterence"
 date: 2024-11-19
-layout: default
+layout: post
 tags: jekyll blog github utterence minima
 ---
 
@@ -85,15 +85,15 @@ I have to report that I've also just used the script code directly, negating the
 
 I also notice the git repository has 'base' in the frontmatter layout yet I have 'default'.. maybe I grabbed an older version, all I know is that it works!
 
-The only other change is to make sure your frontmatter is picking up the default override, for example on this very page:
+The only other change is to make sure your frontmatter is picking up your new post page layout, for example on this very page:
 ```{% raw %}
 ---
 title: "Comments section on github pages with Utterence"
 date: 2024-11-19
-layout: default
+layout: post
 tags: jekyll blog github utterence minima
 ---{% endraw %}
 ```
 
-instead of a layout of home etc. I am sure when more experienced with Jekyll such changes become more natural and understandable.
+instead of a layout of home or default which will omit this post layout etc. I am sure when more experienced with Jekyll such changes become more natural and understandable.
 
