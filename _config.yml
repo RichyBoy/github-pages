@@ -3,4 +3,7 @@ title: Richard's Technical Paraphernalia
 author: Richard Davies
 description: Aide-mémoire for the ageing developer
 layout: default
+url: "https://blog.richy.net/"
+plugins:
+  - jekyll-sitemap
 
