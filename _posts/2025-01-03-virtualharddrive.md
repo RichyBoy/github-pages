@@ -9,7 +9,7 @@ tags: jekyll blog github VHD vhdx ext4 linux wsl development
 
 The default WSL image installs itself somewhere into your C drive under Program Files and is provided as a linux file system image, ext4. This is nice and performant for WSL but not without issues: your Windows OS is likely to be installed on a SSD or a M.2 NVMe and those devices are likely to have a storage limitation, being premium devices.
 
-You could create a VHD under Windows, but if you use this under WSL it will rightly warn you that its performance will be compromised. So you need to create a new ext4 file system. This perhaps wasn't obvious to me (having failed to RTFM) but once I'd understood the problem I quickly realised Windows isn't going to be able to create a ext4 VHD.
+You could create a VHD under Windows, but if you use this under WSL it will rightly warn you that its performance will be compromised. So you need to create a VHD with a ext4 file system. Which you are not going to be able to do under Windows itself - this post shows how to do this through WSL.
 
 The other motivation for having a VHD is being able to copy this to a USB and mount/copy it onto other devices, or eventually, I would like to build a full VHD image with containers of my choice pre-installed, and treat it a little like a virtual box. For now though the sanity of compiling code on a ext4 file system that isn't my C drive is the main target.
 
