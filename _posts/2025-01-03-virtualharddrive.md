@@ -17,27 +17,27 @@ The other motivation for having a VHD is being able to copy this to a USB and mo
 
 I have a SSD device enumerated as E: in Windows where I perform Windows-related development. I will create a small VHD on that device. I am not explaining how to install WSL, enable WSL2 or any mount commands to make the E: device accessible (that should automatically happen anyway). I prefer OpenSuSE Tumbleweed for my WSL (and indeed stand-alone Linux) installs.
 
-'''
+```
 richard@Nightmare:/> sudo dd if=/dev/zero of=/mnt/e/dev.vhdx bs=10M count=1024
 1024+0 records in
 1024+0 records out
 10737418240 bytes (11 GB, 10 GiB) copied, 26.7963 s, 401 MB/s
-''''
+```
 
 The above command creates the VHD container and stuffs it full of zero bytes, bs parameter refers to the block size so you don't want anything excessive to protect system performance whilst giving good user performance, and the count parameter is instructing the number of these blocks, so in this case, a 10Gb vhdx and the above showed that this took < 27 seconds on my machine and this is on a SSD device. Don't agonise over block size - this amount is sane for modern machines.
 
-'''
+```
 sudo mkfs -t ext4 /mnt/e/dev.vhdx
 sudo mkdir /mnt/dev
 sudo mount -o loop /mnt/e/dev.vhdx /mnt/dev
-''''
+```
 
 The remaining commands create the ext4 file system, somewhere to mount it and finally the mount command itself. However you are likely to want to auto-mount this for subsequent restarts of WSL:
 
-'''
+```
 tmpfs /var/tmp tmpfs defaults 0 0
 /mnt/e/dev.vhdx /mnt/dev ext4 defaults,nofail 0 0
-'''
+```
 
 That's the contents of my /etc/fstab so feel free to edit yours and add in that critical line.
 
@@ -45,15 +45,15 @@ That's the contents of my /etc/fstab so feel free to edit yours and add in that 
 
 You don't really want to be performing development on Windows outside of the WSL on a etx4 file system and indeed most tools handle it rather badly. However there are many cases for just wanting to inspect files in explorer, or copy stuff around.
 
-'''
+```
 \\wsl.localhost\openSUSE-Tumbleweed\mnt\dev
-'''
+```
 
 That's the exact path you can use in Explorer to inspect the WSL-mounted container I created above from within my OpenSuSE WSL install.
 
 
-'''
+```
 \\wsl$
-'''
+```
 
 Is the more generic path which will list all of your WSL mounts.
