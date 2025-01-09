@@ -9,7 +9,7 @@ tags: blog linux development docker registry SSL TSL certificates pem crt CA
 
 As a home developer you may only have one machine - in which case you may not even care about 'deploying' a container as long as it runs under MS Visual Code et al, or is built and deployed into the local Docker desktop instance. However I have a raspberry pi, a microserver and a laptop all running linux, as well as WSL 2 on my main Windows host.. and I also like to 'emulate' a more corporate/enterprise environment because ultimately that's where my skills are deployed professionally. Pulling the container from a registry is how it is supposed to work after all..
 
-Running a registry for Docker is therefore very useful - and the pre-packaged image <https://hub.docker.com/_/registry> ticks the boxes. Except it really only does run locally and direct http connections are out of the question. Thus, SSL certificates are required to enable https. I have chose to run the docker registry on my microserver.
+Running a registry for Docker is therefore very useful - and the pre-packaged image <https://hub.docker.com/_/registry> ticks the boxes. Except it really only does run locally and direct http connections are out of the question. Thus, SSL certificates are required to enable https. I have chosen to run the docker registry on my microserver.
 
 This post isn't a tutorial, I'm not going through the finer points of certification generation but it is a aide-memoire to a bunch of commands I'll only ever run once in a blue moon.
 
@@ -65,7 +65,7 @@ openssl x509 -req -in local.csr -CA ./CA.pem -CAkey ./CA.key -CAcreateserial -da
 openssl rsa -in local.key -out local.decrypted.key
 ````
 
-So, as before, generate a new key pair, this time for the host certificate, and then generate a signing request using this new key. The root CA generates a certificate with a nice healthy 10 years in this instance, and finally, extract the private key so that an applciation can sign content against the generated certificate. 
+So, as before, generate a new key pair, this time for the host certificate, and then generate a signing request using this new key. The root CA generates a certificate with a nice healthy 10 years in this instance, and finally, extract the private key so that an application can sign content against the generated certificate. 
 
 The final step is to add the root CA to the linux system key store, as I'm running SuSE it's slightly different to ca-certificates:
 ```
@@ -113,7 +113,7 @@ Perhaps I should have had two separate blog posts :) Bearing in mind the Visual 
 
 In visual studio code, with the Docker plugin (I was going to use IDEA PyCharm but the remote services require a Professional instance; I'm not paying for one at this moment in time) you can naviage to the docker pane and you can add a Generic Repository - which is what registry is. The important part here is to use the correct credentials - in my instance https://microserver.lan:5001 and there are no login/passwords to be entered. My certificate also states microserver however I usually prefer FQDN to prevent my pihole from going off looking up network internals in the outside world. Never mind that..
 
-Here is a screen shot of a push. On the top left panel with the red splodge, right click to tag it with something (foofoo) and the right click again to "push". You then get to select a repository and a tag name, just let it do its thing here. YOu can then see foofoo listed in the registry, and also I've highlighted the remote registry push log. If your certificate setup is wrong this is when you will find out about it in unhelpful ways such as attempted pushes to docker.io and in fact, the VS Code tool is good, but ONLY if everything works.
+Here is a screen shot of a push. On the top left panel with the red splodge, right click to tag it with something (foofoo) and the right click again to "push". You then get to select a repository and a tag name, just let it do its thing here. You can then see foofoo listed in the registry, and I've also highlighted the remote registry push log. If your certificate setup is wrong this is when you will find out about it in unhelpful ways such as attempted pushes to docker.io and in fact, the VS Code tool is good, but ONLY if everything works.
 
 ![Image](/assets/images/vscode.png)
 
@@ -129,4 +129,4 @@ and finally the docker pull and the docker run command for my container:
 
 This isn't exactly production as any extracted key you should put onto a key ring, but hey-ho this is 'home' development. Certificates are nasty and dirty to generate and work - but set up the once, and forget about it. Environments such as AWS will generate all the required key components for you (and store them appropriately).
 
-The other approach I may have taken is to run a reverse proxy and point a AAAA record in richy.net to it. This way, I would be able to create a letsencypt cerficate from a proper trusted root CA. That's certainly how I'd go if I ran a web server on the home network for public use, but I have no reason to publically expose my private registry!
+The other approach I may have taken is to run a reverse proxy and point a AAAA record in richy.net to it. This way, I would be able to create a letsencypt certificate from a proper trusted root CA. That's certainly how I'd go if I ran a web server on the home network for public use, but I have no reason to publicly expose my private registry!
