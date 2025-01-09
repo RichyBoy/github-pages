@@ -97,13 +97,33 @@ Take note of the volume bind (so this is ran in folder one-up from the cert fold
 ```docker logs -f registry```
 is a useful command to run as it will let you know if any of the keys are broken (for instance, I re-created the host certificate but forgot to re-generate the decrypted key so it told me about the mis-match)
 
-Applications from other hosts can now connect and as long as it is to a host specified in the DNS section of the local certificate (as per local.ext) it will connect fine - it's a genuine certicicate. But there is no trust because the root CA isn't known about.
+### Root CA installation(s)
+
+Applications from other hosts can now connect and as long as it is to a host specified in the DNS section of the local certificate (as per local.ext) it will connect securely - it's a genuine certicicate. But there is no trust because the root CA isn't known about.
 
 For Windows 11, in the Settings application search for certificate and this will open the Certificate Manager, navigate to Trusted Root Certificate Authorities and install your root CA.pem file. Unfortunately this is lazily populated and I needed to reboot for this to take affect. The root CA.pem can also be added to Firefox explicitly and many other apps.
 
 ![Image](/assets/images/rootca.png "microserver.lan root CA added to the Windows trusted root")
 
 Visual Code itself was a problem - I had to install [https://marketplace.visualstudio.com/items?itemName=ukoloff.win-ca](https://marketplace.visualstudio.com/items?itemName=ukoloff.win-ca) and its abstract explains exactly why..
+
+### Testing Docker registry
+
+Perhaps I should have had two separate blog posts :) Bearing in mind the Visual Code extension above, and a reboot..
+
+In visual studio code, with the Docker plugin (I was going to use IDEA PyCharm but the remote services require a Professional instance; I'm not paying for one at this moment in time) you can naviage to the docker pane and you can add a Generic Repository - which is what registry is. The important part here is to use the correct credentials - in my instance https://microserver.lan:5001 and there are no login/passwords to be entered. My certificate also states microserver however I usually prefer FQDN to prevent my pihole from going off looking up network internals in the outside world. Never mind that..
+
+Here is a screen shot of a push. On the top left panel with the red splodge, right click to tag it with something (foofoo) and the right click again to "push". You then get to select a repository and a tag name, just let it do its thing here. YOu can then see foofoo listed in the registry, and also I've highlighted the remote registry push log. If your certificate setup is wrong this is when you will find out about it in unhelpful ways such as attempted pushes to docker.io and in fact, the VS Code tool is good, but ONLY if everything works.
+
+[!Image](/assets/images/vscode.png)
+
+Here is a curl command on Linux before and after this push to enquire against the registry:
+
+[!Image](/assets/image/working.png)
+
+and finally the docker pull and the docker run command for my container:
+
+[!Image](/assets/image/excellent.png "Happy days Richard, Happy days")
 
 ## Final notes
 
