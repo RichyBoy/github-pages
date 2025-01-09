@@ -115,15 +115,15 @@ In visual studio code, with the Docker plugin (I was going to use IDEA PyCharm b
 
 Here is a screen shot of a push. On the top left panel with the red splodge, right click to tag it with something (foofoo) and the right click again to "push". You then get to select a repository and a tag name, just let it do its thing here. YOu can then see foofoo listed in the registry, and also I've highlighted the remote registry push log. If your certificate setup is wrong this is when you will find out about it in unhelpful ways such as attempted pushes to docker.io and in fact, the VS Code tool is good, but ONLY if everything works.
 
-[!Image](/assets/images/vscode.png)
+![Image](/assets/images/vscode.png)
 
 Here is a curl command on Linux before and after this push to enquire against the registry:
 
-[!Image](/assets/image/working.png)
+![Image](/assets/image/working.png)
 
 and finally the docker pull and the docker run command for my container:
 
-[!Image](/assets/image/excellent.png "Happy days Richard, Happy days")
+![Image](/assets/image/excellent.png "Happy days Richard, Happy days")
 
 ## Final notes
 
