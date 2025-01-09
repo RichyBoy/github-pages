@@ -9,7 +9,7 @@ tags: blog linux development docker registry SSL TSL certificates pem crt CA
 
 As a home developer you may only have one machine - in which case you may not even care about 'deploying' a container as long as it runs under MS Visual Code et al, or is built and deployed into the local Docker desktop instance. However I have a raspberry pi, a microserver and a laptop all running linux, as well as WSL 2 on my main Windows host.. and I also like to 'emulate' a more corporate/enterprise environment because ultimately that's where my skills are deployed professionally. Pulling the container from a registry is how it is supposed to work after all..
 
-Running a registry for Docker is therefore very useful - and the pre-packaged image [https://hub.docker.com/_/registry](https://hub.docker.com/_/registry) ticks the boxes. Except is really only does run locally and direct http connections are out of the question. Thus, SSL certificates are required to enable https. I have chose to run the docker registry on my microserver.
+Running a registry for Docker is therefore very useful - and the pre-packaged image <https://hub.docker.com/_/registry> ticks the boxes. Except it really only does run locally and direct http connections are out of the question. Thus, SSL certificates are required to enable https. I have chose to run the docker registry on my microserver.
 
 This post isn't a tutorial, I'm not going through the finer points of certification generation but it is a aide-memoire to a bunch of commands I'll only ever run once in a blue moon.
 
@@ -65,7 +65,7 @@ openssl x509 -req -in local.csr -CA ./CA.pem -CAkey ./CA.key -CAcreateserial -da
 openssl rsa -in local.key -out local.decrypted.key
 ````
 
-So, as before, generate a new key pair, this time for the host certificate, and then generate a signing request with the public part of this key. The root CA generates a certificate with a nice healthy 10 years in this instance, and finally, extract the private key so that an applciation can sign content against the generated certificate. 
+So, as before, generate a new key pair, this time for the host certificate, and then generate a signing request using this new key. The root CA generates a certificate with a nice healthy 10 years in this instance, and finally, extract the private key so that an applciation can sign content against the generated certificate. 
 
 The final step is to add the root CA to the linux system key store, as I'm running SuSE it's slightly different to ca-certificates:
 ```
@@ -101,12 +101,12 @@ Applications from other hosts can now connect and as long as it is to a host spe
 
 For Windows 11, in the Settings application search for certificate and this will open the Certificate Manager, navigate to Trusted Root Certificate Authorities and install your root CA.pem file. Unfortunately this is lazily populated and I needed to reboot for this to take affect. The root CA.pem can also be added to Firefox explicitly and many other apps.
 
-![Image](/assets/images/rootca.png) - microserver.lan root CA added to the Windows trusted root
+![Image](/assets/images/rootca.png "microserver.lan root CA added to the Windows trusted root")
 
 Visual Code itself was a problem - I had to install [https://marketplace.visualstudio.com/items?itemName=ukoloff.win-ca](https://marketplace.visualstudio.com/items?itemName=ukoloff.win-ca) and its abstract explains exactly why..
 
 ## Final notes
 
-This isn't exactly production as any extracted key you should put onto a key ring, but hey-ho this is 'home' development. Certificates are nasty and dirty to work with and generate but set up the once, and you can forget about it. Environments such as AWS will generate all the required key components for you (and store them appropriately).
+This isn't exactly production as any extracted key you should put onto a key ring, but hey-ho this is 'home' development. Certificates are nasty and dirty to generate and work - but set up the once, and forget about it. Environments such as AWS will generate all the required key components for you (and store them appropriately).
 
 The other approach I may have taken is to run a reverse proxy and point a AAAA record in richy.net to it. This way, I would be able to create a letsencypt cerficate from a proper trusted root CA. That's certainly how I'd go if I ran a web server on the home network for public use, but I have no reason to publically expose my private registry!
