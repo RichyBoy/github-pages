@@ -119,11 +119,11 @@ Here is a screen shot of a push. On the top left panel with the red splodge, rig
 
 Here is a curl command on Linux before and after this push to enquire against the registry:
 
-![Image](/assets/image/working.png)
+![Image](/assets/images/working.png)
 
 and finally the docker pull and the docker run command for my container:
 
-![Image](/assets/image/excellent.png "Happy days Richard, Happy days")
+![Image](/assets/images/excellent.png "Happy days Richard, Happy days")
 
 ## Final notes
 
