@@ -11,11 +11,11 @@ In may ways it would be simple just to run up an AWS or Azure instance to provid
 
 As an experienced developer/engineer it is easy to tangle yourself up in decisions you would only make in the enterprise environment: I'm not running the storage on a NAS, I don't really care about performance and anyway it is going to run on my 2-core N54L microserver. That said, there are certain things that are sane if you are going to run a 'proper' database in a container: don't use /var storage, do setup proper credentials and where appropriate use secrets. As it happens my bind storage is on a RAID array.
 
-## Example config can be found in my generel repo
+## Example config can be found in my general repo
 
 [https://github.com/RichyBoy/general/tree/main/postgres-configs](https://github.com/RichyBoy/general/tree/main/postgres-configs) . This location contains a number of files and I'll detail these one-by-one. Note, I later will post about quadlet and the compose file will vanish. I'm quite happy with SystemD starting and stopping my world and I'm super-happy to do this in user space, especially as I will being hosting live webservices on my public IPv6 address range at some point - the safer the better.
 
-The **.env** file. I am using the default user and datbase, I've obscured the email but I don't specify the password here at all.
+The **.env** file. I am using the default user and database, I've obscured the email but I don't specify the password here at all.
 ```
 POSTGRES_USER=postgres
 POSTGRES_DB=postgres
