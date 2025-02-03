@@ -7,7 +7,7 @@ tags: blog linux development podman registry postgres secrets userns_mode
 
 ## Databases in the SOHO environment
 
-In may ways it would be simple just to run up an AWS or Azure instance to provide you a database server. I am not opposed to simple, far from it and I approve of simple, but my end goal is a role-out an entire app estate via Tofu (or helm/kubernetes) and a database is just one component of that vision.
+In may ways it would be simple just to run up an AWS or Azure instance to provide you a database server. I am not opposed to simple, far from it and I approve of simple, but my end goal is a role-out of an entire app estate via Tofu (or helm/kubernetes) and a database is just one component of that vision.
 
 As an experienced developer/engineer it is easy to tangle yourself up in decisions you would only make in the enterprise environment: I'm not running the storage on a NAS, I don't really care about performance and anyway it is going to run on my 2-core N54L microserver. That said, there are certain things that are sane if you are going to run a 'proper' database in a container: don't use /var storage, do setup proper credentials and where appropriate use secrets. As it happens my bind storage is on a RAID array.
 
