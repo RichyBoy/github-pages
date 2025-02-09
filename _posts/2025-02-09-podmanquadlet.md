@@ -5,7 +5,7 @@ layout: post
 tags: blog linux development podman quadlet podlet systemd
 ---
 
-## What am I trying to acheive?
+## What am I trying to achieve?
 
 I currently have four containers running various tools: 
 - Container registry
