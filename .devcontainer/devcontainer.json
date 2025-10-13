@@ -1,12 +1,18 @@
  {
      "name": "Jekyll",
      "image": "mcr.microsoft.com/devcontainers/jekyll:2-bookworm",
-     "runArgs": [
-             "--security-opt", "label=disable",
-             "--userns=host",
-             "--hostname=jekyll-dev-container"
-       ],
-     "remoteUser": "root"
+      "remoteUser": "vscode",
+      "workspaceMount":"", // fixed below in the --volume argument  - enables rootless podman
+      "runArgs": [
+        "--userns=keep-id", // retain the user GID/PID
+        "--volume=${localWorkspaceFolder}:/workspaces/${localWorkspaceFolderBasename}:Z", // explicitly mount the workspace folder
+        "--security-opt", "label=disable",
+        "--hostname=jekyll-dev-container"
+    ],
+    "containerEnv": {
+      "HOME": "/home/vscode"
+    }
+
      // "onCreateCommand": ".devcontainer/bin/onCreateCommand.sh",
      // "updateContentCommand": ".devcontainer/bin/updateContentCommand.sh",
  }
