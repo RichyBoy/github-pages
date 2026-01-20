@@ -38,6 +38,12 @@ If it doesn't exist create the following file:
 [network]
 firewall_driver="iptables"
  ```
+ 
+ You may need to make sure iptables is present on your distro:
+ ```
+ sudo zypper install iptables
+ ```
+ for SuSE.
 
 This time you'll certainly have to bounce WSL and in fact I rebooted as it broke VS code <-> WSL sockets entirely.
 
