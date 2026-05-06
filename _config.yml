@@ -4,6 +4,7 @@ author: Richard Davies
 description: Aide-mémoire for the ageing developer
 layout: default
 url: "https://blog.richy.net/"
+google_analytics: G-P72N0PW9DV
 plugins:
   - jekyll-sitemap
 
