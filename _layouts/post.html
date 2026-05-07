@@ -2,6 +2,9 @@
 layout: default
 ---
 <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  {%- if jekyll.environment == 'production' and site.google.tag_manager.container_id -%}
+    {%- include gtm_body.html -%}
+  {%- endif -%}
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
