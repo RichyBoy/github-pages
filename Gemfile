@@ -3,3 +3,6 @@ source "https://rubygems.org"
 gem "minima"
 gem "jekyll-sitemap"
 
+group :jekyll_plugins do
+  gem 'jekyll-google-tag-manager'
+end

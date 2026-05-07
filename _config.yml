@@ -8,3 +8,6 @@ google_analytics: G-P72N0PW9DV
 plugins:
   - jekyll-sitemap
 
+google:
+  tag_manager:
+    container_id: GTM-PTXTFBDJ
